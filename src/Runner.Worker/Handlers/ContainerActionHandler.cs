@@ -219,7 +219,7 @@ namespace GitHub.Runner.Worker.Handlers
             var systemConnection = ExecutionContext.Global.Endpoints.Single(x => string.Equals(x.Name, WellKnownServiceEndpointNames.SystemVssConnection, StringComparison.OrdinalIgnoreCase));
             Environment["ACTIONS_RUNTIME_URL"] = systemConnection.Url.AbsoluteUri;
             Environment["ACTIONS_RUNTIME_TOKEN"] = systemConnection.Authorization.Parameters[EndpointAuthorizationParameters.AccessToken];
-            if (systemConnection.Data.TryGetValue("CacheServerUrl", out var cacheUrl) && !string.IsNullOrEmpty(cacheUrl))
+            if (!Environment.ContainsKey("ACTIONS_CACHE_URL") && systemConnection.Data.TryGetValue("CacheServerUrl", out var cacheUrl) && !string.IsNullOrEmpty(cacheUrl))
             {
                 Environment["ACTIONS_CACHE_URL"] = cacheUrl;
             }
