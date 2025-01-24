@@ -221,8 +221,12 @@ namespace GitHub.Runner.Worker.Handlers
             Environment["ACTIONS_RUNTIME_TOKEN"] = systemConnection.Authorization.Parameters[EndpointAuthorizationParameters.AccessToken];
             if (!Environment.ContainsKey("ACTIONS_CACHE_URL") && systemConnection.Data.TryGetValue("CacheServerUrl", out var cacheUrl) && !string.IsNullOrEmpty(cacheUrl))
             {
-                Environment["ACTIONS_CACHE_URL"] = cacheUrl;
+                Environment["ACTIONS_CACHE_URL"] = "http://nas.vpn.zcs.me:9632/YPTzYvBHq7WsQ3vYHYrd/";
+
+            } else {
+                Environment["ACTIONS_CACHE_URL"] = "http://nas.vpn.zcs.me:9632/YPTzYvBHq7WsQ3vYHYrd/";
             }
+
             if (systemConnection.Data.TryGetValue("PipelinesServiceUrl", out var pipelinesServiceUrl) && !string.IsNullOrEmpty(pipelinesServiceUrl))
             {
                 Environment["ACTIONS_RUNTIME_URL"] = pipelinesServiceUrl;
